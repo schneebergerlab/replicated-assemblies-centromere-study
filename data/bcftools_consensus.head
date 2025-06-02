@@ -1,0 +1,31 @@
+##fileformat=VCFv4.3
+##fileDate=20220923
+##source=syri
+##ALT=<ID=SYN,Description="Syntenic region">
+##ALT=<ID=INV,Description="Inversion">
+##ALT=<ID=TRANS,Description="Translocation">
+##ALT=<ID=INVTR,Description="Inverted Translocation">
+##ALT=<ID=DUP,Description="Duplication">
+##ALT=<ID=INVDP,Description="Inverted Duplication">
+##ALT=<ID=SYNAL,Description="Syntenic alignment">
+##ALT=<ID=INVAL,Description="Inversion alignment">
+##ALT=<ID=TRANSAL,Description="Translocation alignment">
+##ALT=<ID=INVTRAL,Description="Inverted Translocation alignment">
+##ALT=<ID=DUPAL,Description="Duplication alignment">
+##ALT=<ID=INVDPAL,Description="Inverted Duplication alignment">
+##ALT=<ID=HDR,Description="Highly diverged regions">
+##ALT=<ID=INS,Description="Insertion in non-reference genome">
+##ALT=<ID=DEL,Description="Deletion in non-reference genome">
+##ALT=<ID=CPG,Description="Copy gain in non-reference genome">
+##ALT=<ID=CPL,Description="Copy loss in non-reference genome">
+##ALT=<ID=SNP,Description="Single nucleotide polymorphism">
+##ALT=<ID=TDM,Description="Tandem repeat">
+##ALT=<ID=NOTAL,Description="Not Aligned region">
+##INFO=<ID=END,Number=1,Type=Integer,Description="End position on reference genome">
+##INFO=<ID=ChrB,Number=1,Type=String,Description="Chromoosme ID on the non-reference genome">
+##INFO=<ID=StartB,Number=1,Type=Integer,Description="Start position on non-reference genome">
+##INFO=<ID=EndB,Number=1,Type=Integer,Description="End position on non-reference genome">
+##INFO=<ID=Parent,Number=1,Type=String,Description="ID of the parent SR">
+##INFO=<ID=VarType,Number=1,Type=String,Description="Start position on non-reference genome">
+##INFO=<ID=DupType,Number=1,Type=String,Description="Copy gain or loss in the non-reference genome">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO
