@@ -1,25 +1,25 @@
 # Genome Assembly and Centromeric Mutation Analysis Pipelines
 
-This repository contains five modular, reproducible Bash pipelines designed for a comprehensive study of centromeric genome assembly, annotation, variant calling, and mutation simulation in *Arabidopsis thaliana*. The scripts automate key steps from raw assembly to simulated evolution of tandem repeat arrays.
+This repository contains five modular, reproducible Bash pipelines designed for a comprehensive study of genome assembly, annotation, mutation identification, and mutation simulation in *Arabidopsis thaliana*. The scripts automate key steps from raw assembly to simulated evolution of tandem repeat arrays.
 
 ## Repository Structure
 
 ```
 project-root/
-├── 1.assembly.sh               # Genome assembly and evaluation
-├── 2.annotation.sh            # Repeat annotation (CEN178, rDNA, Simple sequence repeat)
-├── 3.assembly_difference.sh   # Assembly comparison, validation, and correction
-├── 4.cen_mutation.sh          # Centromeric mutation analysis and alignment refinement
-├── 5.simulation.sh            # Simulation of gene conversion and tandem repeat evolution
-├── bin/                       # Contains Python and R scripts used in the pipeline
-└── data/                      # Input reference genomes, annotations, and simulation templates
+├── 1.assembly.sh			# Genome assembly and evaluation
+├── 2.annotation.sh			# Repeat annotation (CEN178, rDNA, Simple sequence repeat)
+├── 3.assembly_difference.sh	# Assembly comparison, validation, and correction
+├── 4.cen_mutation.sh		# Centromeric mutation analysis and alignment refinement
+├── 5.simulation.sh			# Simulation of gene conversion and tandem repeat evolution
+├── bin/				# Contains Python and R scripts used in the pipeline
+└── data/				# Input reference genomes, annotations, and simulation templates
 ```
 
 ## Pipelines Overview
 
 ### 1. `1.assembly.sh`: Genome Assembly and Evaluation
 - De novo assembly with HiFiasm, IPA, Peregrine, Canu, Flye
-- Reference-guided scaffolding
+- Reference-based scaffolding
 - Assembly quality assessment using NG50, Merqury, and BUSCO
 - Consensus genome generation for downstream mutation comparison
 
@@ -56,18 +56,15 @@ Each script has its own software dependencies, which are listed at the top of th
 
 Make sure all dependencies are installed and paths are properly configured. Then, execute each script in order or independently as needed:
 
+<!--
 ## Citation
 
 Please cite the following work when using this repository or any of its components in your research:
 
 > Dong, X. et al. "Title of preprint." *bioRxiv*, https://doi.org/xxxxxxx
-
+-->
 
 ## Contact
 
-For questions, please contact: **xdong@mpipz.mpg.de**
-
-## License
-
-MIT License. See `LICENSE` file for details.
+For questions, please contact: xdong@mpipz.mpg.de
 
