@@ -5,7 +5,7 @@
 # ------------------------------------------------------------------------------
 # This script runs de novo genome assembly using multiple tools (HiFiasm, IPA,
 # Peregrine, Canu, Flye), performs reference-based scaffolding, and evaluates 
-# assemblies using CN50, Merqury, and BUSCO. It also generates a consensus 
+# assemblies using NG50, Merqury, and BUSCO. It also generates a consensus 
 # reference genome for coordinate-based mutation comparison.
 #
 # Author: xdong@mpipz.mpg.de
@@ -44,7 +44,7 @@ canu -p A1_canu -d A1_canu_asm genomeSize=135m -pacbio-hifi A1.hifi.fastq.gz \
 flye --pacbio-hifi A1.hifi.fastq.gz --threads 20 -o ./
 
 
-# Assembly statistics (N50 etc.) on primary contigs
+# Assembly statistics (NG50 etc.) on primary contigs
 bin/calc_CN50.pl A1.hifiasm_l0.bp.p_ctg.fasta 135000000 5 > \
     A1.hifiasm_l0.bp.p_ctg.fasta.N50.calc.result.txt
 
