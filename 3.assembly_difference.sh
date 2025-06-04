@@ -7,7 +7,7 @@
 # variants, validates candidate assembly errors using Illumina and HiFi reads,
 # and evaluates correction tools such as Pilon, DeepVariant, pbsv, and Sniffles.
 #
-# Author: xdong@mpip.mpg.de
+# Author: xdong@mpipz.mpg.de
 ################################################################################
 
 
