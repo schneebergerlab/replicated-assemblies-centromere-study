@@ -6,14 +6,15 @@ This repository contains five modular, reproducible Bash pipelines designed for 
 
 ```
 project-root/
-├── 1.assembly.sh			# Genome assembly and evaluation
-├── 2.annotation.sh			# Repeat annotation (CEN178, rDNA, Simple sequence repeat)
-├── 3.assembly_difference.sh	# Assembly comparison, validation, and correction
-├── 4.cen_mutation.sh		# Centromeric mutation analysis and alignment refinement
-├── 5.simulation.sh			# Simulation of gene conversion and tandem repeat evolution
-├── bin/				# Contains Python and R scripts used in the pipeline
-└── data/				# Input reference genomes, annotations, and simulation templates
+├── 1.assembly.sh               # Genome assembly and evaluation
+├── 2.annotation.sh            # Repeat annotation (CEN178, rDNA, SSRs)
+├── 3.assembly_difference.sh   # Assembly comparison, validation, and correction
+├── 4.cen_mutation.sh          # Centromeric mutation analysis and alignment refinement
+├── 5.simulation.sh            # Simulation of gene conversion and tandem repeat evolution
+├── bin/                       # Contains Python and R scripts used in the pipeline
+└── data/                      # Input reference genomes, annotations, and simulation templates
 ```
+
 
 ## Pipelines Overview
 
