@@ -57,13 +57,13 @@ Each script has its own software dependencies, which are listed at the top of th
 
 Make sure all dependencies are installed and paths are properly configured. Then, execute each script in order or independently as needed:
 
-<!--
+
 ## Citation
 
 Please cite the following work when using this repository or any of its components in your research:
 
-> Dong, X. et al. "Title of preprint." *bioRxiv*, https://doi.org/xxxxxxx
--->
+> Dong, X. et al. "The mutational dynamics of the Arabidopsis centromeres" *bioRxiv*, https://doi.org/10.1101/2025.06.02.657473
+
 
 ## Contact
 
