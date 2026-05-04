@@ -91,35 +91,40 @@ done
 # Simulation 2: Centromeric Mutation Simulation
 ###############################################
 
-# Step 1: Initial Simulation (1000 generations)
-python ./bin/simulate.py \
-    ./data/15000copy_cen178.seq 1000 \
-    ./data/15000copy_cen178.178bp.bed.pos \
-    1.fasta/1000generation.out.fa \
-    2.records/1000generation.record.txt \
-    3.generation_unit_pos/1000generation.unit.pos
+# Step 0: Complile Simulation Programm for large deletion (simulate.ins_bias.cpp for mutation pattern observed in eight MA32 samples)
+g++ -std=c++11 -O3 -o  simulate.large_del simulate.large_del.cpp
 
-# Step 2: Continue Simulation (to 6 million generations)
-for i in $(seq 2000 1000 6000000); do
-    prev=$((i - 1000))
-    python ./bin/simulate.py \
-        1.fasta/${prev}generation.out.fa 1000 \
-        3.generation_unit_pos/${prev}generation.unit.pos \
-        1.fasta/${i}generation.out.fa \
-        2.records/${i}generation.record.txt \
-        3.generation_unit_pos/${i}generation.unit.pos
+# Step 1: Initial Simulation (the first 1000 generations)
+./bin/simulate.large_del \
+	./data/CEN1.seq 1000 \
+	./data/CEN1.cen178.bed.pos \
+	1.fasta/1000generation.out.fa \
+	2.records/1000generation.record.txt \
+	3.generation_unit_pos/1000generation.unit.pos
+
+# Step 2: Continue Simulation (to 150,000 generations)
+for i in `seq 2000 1000 150000`; do 
+	j=$((i - 1000)); 
+	./bin/simulate.large_del \
+		1.fasta/${j}generation.out.fa 1000 \
+		3.generation_unit_pos/${j}generation.unit.pos \
+		1.fasta/${i}generation.out.fa \
+		2.records/${i}generation.record.txt \
+		3.generation_unit_pos/${i}generation.unit.pos
 done
 
 # Step 3: Add FASTA headers
-for test in $(seq 1 5); do
-    for gen in $(seq 1000 1000 6000000); do
-        echo ">centro_${gen}gen" | cat - test${test}/1.fasta/${gen}generation.out.fa \
-            > tmp && mv tmp test${test}/1.fasta/${gen}generation.out.fa
-    done
+for cen in $(seq 1 5); do
+	for test in `seq -w 1 100`; do
+		for gen in $(seq 1000 1000 150000); do
+			echo ">centro_${gen}gen" | cat - CEN${cen}_test${test}/1.fasta/${gen}generation.out.fa \
+				> tmp && mv tmp CEN${cen}_test${test}/1.fasta/${gen}generation.out.fa
+		done
+	done
 done
 
 # Step 4: Extract Units
-for gen in $(seq 1000 1000 6000000); do
+for gen in $(seq 1000 1000 150000); do
     sed '$d' 3.generation_unit_pos/${gen}generation.unit.pos > tmp1
     sed '1d' 3.generation_unit_pos/${gen}generation.unit.pos > tmp2
     paste tmp1 tmp2 | awk -v gen=$gen '{print "centro_"gen"gen\t"$2"\t"$4}' \
@@ -130,7 +135,7 @@ for gen in $(seq 1000 1000 6000000); do
 done
 
 # Step 5: Generate Consensus and Stats
-for gen in $(seq 1000 1000 6000000); do
+for gen in $(seq 1000 1000 150000); do
     usearch -fastx_uniques 4.generation_unit_fasta/${gen}generation.unit.fa \
         -fastaout 4.generation_unit_fasta/${gen}generation.unit.uniq.fa
 
@@ -168,7 +173,7 @@ sed -i 's/generation.unit.fa//g' all.generations.*
 # Step 7: Merge Test Statistics
 for test in $(seq 1 5); do
     for file in fasta.stat cen178.count avg.cen178.edit_distance unit.uniq.consensus.fa fasta.at_content; do
-        awk -v test=$test '$1 <= 6000000 {print $0"\tTest"test}' \
+        awk -v test=$test '$1 <= 150000 {print $0"\tTest"test}' \
             test${test}/all.generations.${file} >> 5tests.all.generations.${file}
     done
 done
@@ -182,11 +187,11 @@ python ./bin/heatmap_moddotplot.py \
     6.moddotplot/1.bed_iden0/15000copy_cen178.bed \
     6.moddotplot/3.png/centro_15K_CEN178.heatmap.png \
     --palette-colors '#313695' '#4575B4' '#74ADD1' '#ABD9E9' '#E0F3F8' '#FEE090' '#FDAE61' '#F46D43' '#D73027' '#A50026' \
-    --breakpoints 70 73 76 79 82 85 88 91 94 97 100 \
+    --breakpoints 70 80 90 91 92 93 94 95 96 98 100 \
     --width 7 --height 7 -xlab "Array Size (bp)" -ylab "Array Size (bp)" \
     --title 0gen --xlim 0 $maxseq --ylim 0 $maxseq
 
-for gen in $(seq 10000 10000 6000000); do
+for gen in $(seq 10000 10000 150000); do
     moddotplot static -f 1.fasta/${gen}generation.out.fa -w 10000 -id 0 --no-plot -o 6.moddotplot/1.bed_iden0/
     awk '$7 >= 70' 6.moddotplot/1.bed_iden0/centro_${gen}gen.bed > 6.moddotplot/2.bed_iden70/centro_${gen}gen.iden70.bed
     python ./bin/heatmap_moddotplot.py \

@@ -48,7 +48,21 @@ flye --pacbio-hifi A1.hifi.fastq.gz --threads 20 -o ./
 bin/calc_CN50.pl A1.hifiasm_l0.bp.p_ctg.fasta 135000000 5 > \
     A1.hifiasm_l0.bp.p_ctg.fasta.N50.calc.result.txt
 
+hifiasm --ont -l0 -t 20 -o A1.ont_10k_qv15 --rl-cut 10000 --sc-cut 15 A1.ont.fastq.gz
 
+~/dorado-1.1.1-linux-x64/bin/dorado \
+        aligner ./1.hifiasm/A1.ont_10k_qv15.bp.p_ctg.fa ./nanopore_basecalled_data/A1.with-table.bam | samtools sort -o - - > A1.ONT.ctg.all.sorted.bam
+samtools index A1.ONT.ctg.all.sorted.bam
+
+mosdepth -t 20 -x -Q1 'A1.ONT' A1.ONT.ctg.all.sorted.bam
+python ./scripts/coverage_filter.py 'A1.ONT.per-base.bed.gz' > A1.ONT.normal_cov.bed
+
+~/dorado-1.1.1-linux-x64/bin/dorado \
+            polish --threads 20 --batchsize 8 \
+            --regions A1.ONT.normal_cov.bed \
+            --device cuda:2 --ignore-read-groups \
+	    A1.ONT.ctg.all.sorted.bam ./1.hifiasm/A1.ont_10k_qv15.bp.p_ctg.fa > A1.ont_10k_qv15.bp.p_ctg.dorado_polished.fa
+samtools faidx A1.ont_10k_qv15.bp.p_ctg.dorado_polished.fa
 
 ################################################################################
 # Step 2: Reference-Based Scaffolding (Using Col-CEN)
