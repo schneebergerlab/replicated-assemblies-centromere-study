@@ -31,17 +31,17 @@ project-root/
 - Simple sequence repeat annotation using Arabidopsis-specific repeat libraries
 - TE annotation using EDTA and ATHILAfinder
 
-### 3. `3.assembly_difference.sh`: Assembly Comparison and Validation
+### `3.assembly_difference.sh`: Assembly Comparison and Validation
 - Structural variant calling using SYRI
 - Misassembly validation using Illumina and HiFi reads based alignment
 - Error correction with Pilon, DeepVariant, pbsv, and Sniffles
 
-### 4. `4.cen_mutation.sh`: Centromeric Mutation Analysis
+### `4.cen_mutation.sh`: Centromeric Mutation Analysis
 - Word-based alignment for optimal matching in repeat-dense regions
 - Mutation left-alignment and false-positive filtering
 - HOR score analysis and in-frame mutation pattern checking
 
-### 5. `5.simulation.sh`: Simulations of Centromeric Evolution
+### `5.simulation.sh`: Simulations of Centromeric Evolution
 - Gene conversion simulation: Introduces random point mutations and detects non-allelic conversion events via k-mer overlap
 - Tandem repeat mutation simulation: Evolves five A. thaliana centromeric repeats over 150,000 generations, followed by analysis of homogenization, consensus generation, heatmap creation, and video animation
 

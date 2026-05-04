@@ -48,6 +48,7 @@ flye --pacbio-hifi A1.hifi.fastq.gz --threads 20 -o ./
 bin/calc_CN50.pl A1.hifiasm_l0.bp.p_ctg.fasta 135000000 5 > \
     A1.hifiasm_l0.bp.p_ctg.fasta.N50.calc.result.txt
 
+
 # Assemble ONT reads using hifiasm
 hifiasm --ont -l0 -t 20 -o A1.ont_10k_qv15 --rl-cut 10000 --sc-cut 15 A1.ont.fastq.gz
 
