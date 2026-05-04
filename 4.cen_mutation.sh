@@ -121,7 +121,7 @@ bedtools map -a 500SNP.sorted.bed -b CEN178.bed.repetitiveness.HORscore -c 5 -o 
 
 
 ################################################################################
-# Step 5: Analyze in-frame mutation patterns via NUCmer alignment to CEN178
+# Step 5: Analyze tandem-repeat preserving mutation patterns via NUCmer alignment to CEN178
 # ------------------------------------------------------------------------------
 # Helps to visualize if insertions/deletions align with repeat structure.
 ################################################################################

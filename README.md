@@ -19,15 +19,17 @@ project-root/
 ## Pipelines Overview
 
 ### 1. `1.assembly.sh`: Genome Assembly and Evaluation
-- De novo assembly with HiFiasm, IPA, Peregrine, Canu, Flye
+- HiFi reads de novo assembly with HiFiasm, IPA, Peregrine, Canu, Flye
+- ONT reads de novo assembly with HiFiasm and polished by Dorado
 - Reference-based scaffolding
 - Assembly quality assessment using NG50, Merqury, and BUSCO
 - Consensus genome generation for downstream mutation comparison
 
 ### 2. `2.annotation.sh`: Repeat Annotation
-- CEN178 annotation using TRASH
+- CEN178 annotation using TRASH and CentroAnno
 - rDNA and telomeric repeat detection with RepeatMasker and a custom library
 - Simple sequence repeat annotation using Arabidopsis-specific repeat libraries
+- TE annotation using EDTA and ATHILAfinder
 
 ### 3. `3.assembly_difference.sh`: Assembly Comparison and Validation
 - Structural variant calling using SYRI
@@ -41,14 +43,14 @@ project-root/
 
 ### 5. `5.simulation.sh`: Simulations of Centromeric Evolution
 - Gene conversion simulation: Introduces random point mutations and detects non-allelic conversion events via k-mer overlap
-- Tandem repeat mutation simulation: Evolves a 15,000-copy CEN178 array over 6 million generations, followed by analysis of homogenization, consensus generation, heatmap creation, and video animation
+- Tandem repeat mutation simulation: Evolves five A. thaliana centromeric repeats over 150,000 generations, followed by analysis of homogenization, consensus generation, heatmap creation, and video animation
 
 ## Dependencies
 
 Each script has its own software dependencies, which are listed at the top of the respective file. Common tools and packages include:
 
-- Genome assemblers: HiFiasm, IPA, Peregrine, Canu, Flye
-- Annotation tools: TRASH, RepeatMasker
+- Genome assemblers: HiFiasm, IPA, Peregrine, Canu, Flye, dorado
+- Annotation tools: TRASH, RepeatMasker, CentroAnno, ATHILAfinder
 - Variant analysis: SYRI, Pilon, DeepVariant, Sniffles, pbsv
 - Supporting scripts: Python, R, Perl (located in `bin/`)
 - Custom input files: (located in `data/`)
@@ -68,4 +70,3 @@ Please cite the following work when using this repository or any of its componen
 ## Contact
 
 For questions, please contact: xdong@mpipz.mpg.de
-
